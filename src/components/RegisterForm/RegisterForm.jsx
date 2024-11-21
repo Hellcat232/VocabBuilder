@@ -25,11 +25,10 @@ const RegistrationForm = () => {
   return (
     <form onSubmit={handleSubmit()} className={css['register-form']}>
       <div className={css['title-descr']}>
-        <h2 className={css['register-title']}>Registration</h2>
+        <h2 className={css['register-title']}>Register</h2>
         <p className={css['register-description']}>
-          Thank you for your interest in our platform! In order to register, we
-          need some information. Please provide us with the following
-          information.
+          To start using our services, please fill out the registration form
+          below. All fields are mandatory:
         </p>
       </div>
 
@@ -48,27 +47,17 @@ const RegistrationForm = () => {
         />
         {errors.email && <p>{errors.email.message}</p>}
 
-        <div className={css['password-wrapper']}>
-          <input
-            // type={showPassword ? 'text' : 'password'}
-            {...register('password')}
-            placeholder="Password"
-            className={css['register-inputs']}
-          />
-          <button
-            type="button"
-            // onClick={togglePasswordVisibility}
-            className={css['toggle-password']}
-          >
-            {/* {showPassword ? <IoEyeOff size="16" /> : <IoEye size="16" />} */}
-          </button>
-        </div>
+        <input
+          // type={showPassword ? 'text' : 'password'}
+          {...register('password')}
+          placeholder="Password"
+          className={css['register-inputs']}
+        />
         {errors.password && <p>{errors.password.message}</p>}
       </div>
-
-      <button type="submit" className={css['register-btn']}>
-        Sign Up
-      </button>
+      <div>
+        <button className={css['register-btn']}>sign up</button>
+      </div>
     </form>
   );
 };

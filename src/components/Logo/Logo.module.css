@@ -1,0 +1,19 @@
+.logo-div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-direction: row;
+}
+
+.logo-img {
+  width: 36px;
+  height: 36px;
+}
+
+.logo-title {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 133%;
+  color: var(--black);
+}
