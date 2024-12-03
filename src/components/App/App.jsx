@@ -2,18 +2,31 @@ import css from './App.module.css';
 
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import Header from '../Header/Header';
 
-const RegisterPage = lazy(() => import('../../pages/RegisterPage/RegisterPage'));
+const RegisterPage = lazy(() =>
+  import('../../pages/RegisterPage/RegisterPage'),
+);
 const LoginPage = lazy(() => import('../../pages/LoginPage/LoginPage'));
 const MainPage = lazy(() => import('../../pages/MainPage/MainPage'));
-const RecommendPage = lazy(() => import('../../pages/RecommendPage/RecommendPage'));
-const DictionaryPage = lazy(() => import('../../pages/DictionaryPage/DictionaryPage'));
-const TrainingPage = lazy(() => import('../../pages/TrainingPage/TrainingPage'));
-const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage'));
+const RecommendPage = lazy(() =>
+  import('../../pages/RecommendPage/RecommendPage'),
+);
+const DictionaryPage = lazy(() =>
+  import('../../pages/DictionaryPage/DictionaryPage'),
+);
+const TrainingPage = lazy(() =>
+  import('../../pages/TrainingPage/TrainingPage'),
+);
+const NotFoundPage = lazy(() =>
+  import('../../pages/NotFoundPage/NotFoundPage'),
+);
 
 const App = () => {
   return (
     <>
+      <Header />
+
       <Suspense fallback={''}>
         <Routes>
           <Route path="/register" element={<RegisterPage />} />

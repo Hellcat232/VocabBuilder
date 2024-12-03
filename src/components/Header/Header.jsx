@@ -4,7 +4,7 @@ import UserNav from '../UserNav/UserNav';
 
 const Header = () => {
   return (
-    <header>
+    <header className={css.header}>
       <Logo />
       <UserNav />
     </header>
