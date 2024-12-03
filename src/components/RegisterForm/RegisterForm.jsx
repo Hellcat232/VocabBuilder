@@ -40,7 +40,7 @@ const RegistrationForm = () => {
       onSubmit={handleSubmit(getRegisterData)}
       className={css['register-form']}
     >
-      <div className={css['title-descr']}>
+      <div>
         <h2 className={css['register-title']}>Register</h2>
         <p className={css['register-description']}>
           To start using our services, please fill out the registration form

@@ -21,15 +21,18 @@ export const registration = createAsyncThunk(
   },
 );
 
-export const login = createAsyncThunk('api/login', async (value, thunkAPI) => {
-  try {
-    const response = await axios.post('/users/signin');
+export const login = createAsyncThunk(
+  'api/login',
+  async ({ email, password }, thunkAPI) => {
+    try {
+      const response = await axios.post('/users/signin', { email, password });
 
-    return response;
-  } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
-  }
-});
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
 
 export const refresh = createAsyncThunk(
   'api/refresh',

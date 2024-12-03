@@ -18,6 +18,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
@@ -54,9 +58,6 @@ img {
   height: auto;
 }
 
-* {
-  box-sizing: border-box;
-}
 body {
   margin: 0;
   display: flex;

@@ -3,15 +3,19 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
+import { useDispatch } from 'react-redux';
+
+import { login } from '../../redux/auth/operations';
+
 const schema = yup
   .object({
-    name: yup.string().required(),
     email: yup.string().required(),
     password: yup.mixed().required(),
   })
   .required();
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -21,44 +25,49 @@ const LoginForm = () => {
     resolver: yupResolver(schema),
   });
 
+  const getLoginData = (data) => {
+    const { email, password } = data;
+
+    dispatch(login({ email, password }));
+  };
+
   return (
-    <form onSubmit={handleSubmit()} className={css['register-form']}>
-      <div className={css['title-descr']}>
-        <h2 className={css['register-title']}>Registration</h2>
-        <p className={css['register-description']}>
-          Thank you for your interest in our platform! In order to register, we need some
-          information. Please provide us with the following information.
+    <form onSubmit={handleSubmit(getLoginData)} className={css['login-form']}>
+      <div>
+        <h2 className={css['login-title']}>Login</h2>
+        <p className={css['login-description']}>
+          Please enter your login details to continue using our service:
         </p>
       </div>
 
       <div className={css['inputs-div']}>
-        <input {...register('name')} placeholder="Name" className={css['register-inputs']} />
-        {errors.name && <p>{errors.name.message}</p>}
+        <div style={{ marginTop: '8px' }}>
+          <input
+            {...register('email')}
+            placeholder="Email"
+            className={css['login-inputs']}
+          />
+          {errors.email && (
+            <p className={css['error-container']}>{errors.email.message}</p>
+          )}
+        </div>
 
-        <input {...register('email')} placeholder="Email" className={css['register-inputs']} />
-        {errors.email && <p>{errors.email.message}</p>}
-
-        <div className={css['password-wrapper']}>
+        <div style={{ marginTop: '8px' }}>
           <input
             // type={showPassword ? 'text' : 'password'}
             {...register('password')}
             placeholder="Password"
-            className={css['register-inputs']}
+            className={css['login-inputs']}
           />
-          <button
-            type="button"
-            // onClick={togglePasswordVisibility}
-            className={css['toggle-password']}
-          >
-            {/* {showPassword ? <IoEyeOff size="16" /> : <IoEye size="16" />} */}
-          </button>
+          {errors.password && (
+            <p className={css['error-container']}>{errors.password.message}</p>
+          )}
         </div>
-        {errors.password && <p>{errors.password.message}</p>}
       </div>
-
-      <button type="submit" className={css['register-btn']}>
-        Sign Up
-      </button>
+      <div className={css.btns}>
+        <button className={css['login-btn']}>Login</button>
+        <button className={css['register-btn']}>Register</button>
+      </div>
     </form>
   );
 };
