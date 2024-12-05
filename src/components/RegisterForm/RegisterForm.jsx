@@ -3,10 +3,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { selectIsLoggedIn } from '../../redux/auth/selectors';
+import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { registration } from '../../redux/auth/operations';
 
@@ -20,6 +18,7 @@ const schema = yup
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -33,6 +32,10 @@ const RegistrationForm = () => {
     const { name, email, password } = data;
 
     dispatch(registration({ name, email, password }));
+
+    navigate('/');
+
+    reset();
   };
 
   return (
@@ -85,7 +88,9 @@ const RegistrationForm = () => {
       </div>
       <div className={css.btns}>
         <button className={css['register-btn']}>Register</button>
-        <button className={css['login-btn']}>Login</button>
+        <NavLink className={css['login-btn']} to="/login">
+          Login
+        </NavLink>
       </div>
     </form>
   );

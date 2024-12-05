@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { useDispatch } from 'react-redux';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { login } from '../../redux/auth/operations';
 
@@ -16,6 +17,7 @@ const schema = yup
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,10 +27,14 @@ const LoginForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const getLoginData = (data) => {
+  const getLoginData = async (data) => {
     const { email, password } = data;
 
-    dispatch(login({ email, password }));
+    const { status } = await dispatch(login({ email, password })).unwrap();
+
+    if (status === 200) navigate('/');
+
+    reset();
   };
 
   return (
@@ -66,7 +72,9 @@ const LoginForm = () => {
       </div>
       <div className={css.btns}>
         <button className={css['login-btn']}>Login</button>
-        <button className={css['register-btn']}>Register</button>
+        <NavLink className={css['register-btn']} to="/register">
+          Register
+        </NavLink>
       </div>
     </form>
   );

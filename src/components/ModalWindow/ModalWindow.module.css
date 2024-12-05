@@ -1,0 +1,57 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: absolute;
+  top: 50%;
+  left: 74%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background: var(--green);
+  width: 185px;
+  height: 812px;
+  padding: 16px 16px 0 16px;
+}
+
+.modal-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 166px;
+}
+
+.user-name {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--white);
+}
+
+.person {
+  color: var(--green);
+  width: 14px;
+  height: 14px;
+}
+
+.div-person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 30px;
+  width: 36px;
+  height: 36px;
+}
+
+.close-btn {
+  border: none;
+  padding: 0;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--white);
+}

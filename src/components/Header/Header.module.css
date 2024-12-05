@@ -1,4 +1,38 @@
 .header {
   background: var(--white-1);
   padding: 16px 16px 12px 16px;
+  display: flex;
+  gap: 38px;
+  align-items: center;
+}
+
+.name {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--black);
+}
+
+.person {
+  color: lightgrey;
+  width: 14px;
+  height: 14px;
+}
+
+.div-person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--green);
+  border-radius: 30px;
+  width: 36px;
+  height: 36px;
+}
+
+.name-person-burger {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
 }

@@ -1,8 +1,20 @@
 import css from './App.module.css';
 
+import Modal from 'react-modal';
 import { Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import Header from '../Header/Header';
+import { refresh } from '../../redux/auth/operations';
+import {
+  selectIsRefreshing,
+  selectIsLoggedIn,
+  selectIsUser,
+} from '../../redux/auth/selectors';
+
+import { PublicRoute } from '../PublicRoute/PublicRoute';
+import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 
 const RegisterPage = lazy(() =>
   import('../../pages/RegisterPage/RegisterPage'),
@@ -22,19 +34,63 @@ const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage/NotFoundPage'),
 );
 
+Modal.setAppElement('#root');
+
 const App = () => {
-  return (
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isRefreshing = useSelector(selectIsRefreshing);
+  const isUser = useSelector(selectIsUser);
+
+  useEffect(() => {
+    dispatch(refresh());
+  }, [dispatch]);
+
+  return isRefreshing ? (
+    <p>Loading...</p>
+  ) : (
     <>
       <Header />
 
       <Suspense fallback={''}>
         <Routes>
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/dictionary" element={<DictionaryPage />} />
-          <Route path="/recommend" element={<RecommendPage />} />
-          <Route path="/training" element={<TrainingPage />} />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute redirectTo="/" component={<RegisterPage />} />
+            }
+          />
+          <Route
+            path="/login"
+            element={<PublicRoute redirectTo="/" component={<LoginPage />} />}
+          />
+          <Route
+            path="/"
+            element={
+              <PrivateRoute redirectTo="/login" component={<MainPage />} />
+            }
+          />
+          <Route
+            path="/dictionary"
+            element={
+              <PrivateRoute
+                redirectTo="/login"
+                component={<DictionaryPage />}
+              />
+            }
+          />
+          <Route
+            path="/recommend"
+            element={
+              <PrivateRoute redirectTo="/login" component={<RecommendPage />} />
+            }
+          />
+          <Route
+            path="/training"
+            element={
+              <PrivateRoute redirectTo="/login" component={<TrainingPage />} />
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
