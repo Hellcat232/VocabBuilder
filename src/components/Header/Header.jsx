@@ -24,26 +24,31 @@ const Header = () => {
 
   return (
     <header className={css.header}>
-      <div>
-        <Logo />
-      </div>
-      {isLoggedIn && (
-        <div className={css['name-person-burger']}>
-          {user !== null ? (
-            <p className={css.name}>{user.data.name}</p>
-          ) : (
-            <p className={css.name}>Name</p>
-          )}
-
-          <div className={css['div-person']}>
-            <IoMdPerson className={css.person} />
-          </div>
-
-          <button onClick={openModal}>
-            <RxHamburgerMenu style={{ color: 'black' }} />
-          </button>
+      <div className={css['header-content']}>
+        <div>
+          <Logo />
         </div>
-      )}
+
+        {isLoggedIn && (
+          <div className={css['name-person-burger']}>
+            {user !== null ? (
+              <p className={css.name}>{user.data.name}</p>
+            ) : (
+              <p className={css.name}>Name</p>
+            )}
+
+            <div className={css['div-person']}>
+              <IoMdPerson className={css.person} />
+            </div>
+
+            <button onClick={openModal} className={css['burger-btn']}>
+              <RxHamburgerMenu
+                style={{ color: 'black', width: '32', height: '22' }}
+              />
+            </button>
+          </div>
+        )}
+      </div>
       <ModalWindow modalIsOpen={modalIsOpen} closeModal={closeModal} />
     </header>
   );

@@ -11,7 +11,7 @@
   transform: translate(-50%, -50%);
   background: var(--green);
   width: 185px;
-  height: 812px;
+  height: 100vh;
   padding: 16px 16px 0 16px;
 }
 
